@@ -20,9 +20,14 @@ $ composer install
 ```
 ### Environment Configuration
 ```shell
-$ cp .env.example to .env
+$ cp .env.example .env
 ```
 After this file copy, update the attributes in .env to match your environment, database, and API Credential
+
+### Run migration
+```shell
+$ php artisan migrate
+```
 
 ### Data Seed Sample
 Copy Or Create file messages_sample.json into storage/app/
