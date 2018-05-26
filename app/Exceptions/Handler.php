@@ -2,6 +2,8 @@
 
 namespace App\Exceptions;
 
+use App\Traits\RestExceptionHandlerTrait;
+use App\Traits\RestTrait;
 use Exception;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Auth\Access\AuthorizationException;
@@ -11,6 +13,9 @@ use Symfony\Component\HttpKernel\Exception\HttpException;
 
 class Handler extends ExceptionHandler
 {
+    use RestTrait;
+    use RestExceptionHandlerTrait;
+
     /**
      * A list of the exception types that should not be reported.
      *
@@ -45,6 +50,12 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $e)
     {
-        return parent::render($request, $e);
+        if(!$this->isApiCall($request)) {
+            $retval = parent::render($request, $e);
+        } else {
+            $retval = $this->getJsonResponseForException($request, $e);
+        }
+
+        return $retval;
     }
 }

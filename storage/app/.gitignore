@@ -1,2 +1,3 @@
 *
 !.gitignore
+!messages_sample.json.example

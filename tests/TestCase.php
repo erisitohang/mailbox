@@ -11,4 +11,9 @@ abstract class TestCase extends Laravel\Lumen\Testing\TestCase
     {
         return require __DIR__.'/../bootstrap/app.php';
     }
+
+    protected function apiUrl($url)
+    {
+        return '/api/v1/' . $url;
+    }
 }
